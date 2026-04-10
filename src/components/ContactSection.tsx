@@ -1,40 +1,72 @@
-import { Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 const ContactSection = () => {
   return (
-    <section id="contact" className="py-24 px-6 bg-card/50">
-      <div className="max-w-3xl mx-auto text-center">
-        <p className="font-mono text-primary text-sm tracking-widest uppercase mb-2">Contact</p>
-        <h2 className="text-3xl sm:text-5xl font-bold mb-6">
-          Let's <span className="text-gradient">connect</span>
-        </h2>
-        <p className="text-muted-foreground text-lg mb-10">
-          Interested in collaborating or have a project in mind? I'd love to hear from you.
-        </p>
+    <section id="contact" className="py-24 px-6">
+      <div className="max-w-7xl mx-auto lg:px-6">
+        <div className="grid lg:grid-cols-2 gap-16">
+          <div>
+            <p className="text-sm text-muted-foreground uppercase tracking-widest mb-3">Contact</p>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-6">
+              Let's work{" "}
+              <span className="font-serif italic text-primary">together</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-10">
+              Have a project in mind or want to collaborate? Feel free to reach out — I'd love to
+              hear from you.
+            </p>
 
-        <a
-          href="mailto:favour@cosmointentlab.com"
-          className="inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-primary text-primary-foreground font-semibold text-lg hover:opacity-90 transition-opacity glow-border"
-        >
-          <Mail className="w-5 h-5" />
-          Get in Touch
-        </a>
+            <div className="space-y-6">
+              {[
+                { icon: Mail, label: "Email", value: "favour@cosmointentlab.com" },
+                { icon: Phone, label: "Phone", value: "+234 XXX XXX XXXX" },
+                { icon: MapPin, label: "Location", value: "Nigeria" },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center">
+                    <item.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{item.label}</p>
+                    <p className="font-medium">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-        <div className="flex justify-center gap-6 mt-12">
-          {[
-            { icon: Github, href: "#", label: "GitHub" },
-            { icon: Linkedin, href: "#", label: "LinkedIn" },
-            { icon: Twitter, href: "#", label: "Twitter" },
-          ].map((social) => (
-            <a
-              key={social.label}
-              href={social.href}
-              aria-label={social.label}
-              className="w-12 h-12 rounded-lg bg-secondary border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-colors"
-            >
-              <social.icon className="w-5 h-5" />
-            </a>
-          ))}
+          <div>
+            <form className="space-y-5" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid sm:grid-cols-2 gap-5">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-primary transition-colors"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-primary transition-colors"
+                />
+              </div>
+              <input
+                type="text"
+                placeholder="Subject"
+                className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-primary transition-colors"
+              />
+              <textarea
+                rows={5}
+                placeholder="Your Message"
+                className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/20 focus:border-primary transition-colors resize-none"
+              />
+              <button
+                type="submit"
+                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </section>
