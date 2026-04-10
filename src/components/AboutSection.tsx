@@ -10,7 +10,16 @@ const AboutSection = () => {
               <span className="font-serif italic text-primary">meaningful</span> digital experiences
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              As the CTO of Cosmo Intent Lab, I lead the technical vision behind a branding company
+              As the CTO of{" "}
+              <a 
+                href="https://cosmoint24.com.ng" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-foreground font-semibold hover:text-primary transition-colors"
+              >
+                Cosmo Intent Lab
+              </a>
+              , I lead the technical vision behind a branding company
               that helps businesses build their digital identity. My expertise spans mobile development,
               digital strategy, and team leadership.
             </p>

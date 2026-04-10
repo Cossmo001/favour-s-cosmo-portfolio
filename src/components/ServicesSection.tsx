@@ -9,7 +9,20 @@ const services = [
   {
     icon: Palette,
     title: "Branding",
-    desc: "Creating cohesive brand identities through Cosmo Intent Lab — from strategy to visual design and digital presence.",
+    desc: (
+      <>
+        Creating cohesive brand identities through{" "}
+        <a 
+          href="https://cosmoint24.com.ng" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-foreground hover:text-primary transition-colors underline underline-offset-4"
+        >
+          Cosmo Intent Lab
+        </a>{" "}
+        — from strategy to visual design and digital presence.
+      </>
+    ),
   },
   {
     icon: Globe,

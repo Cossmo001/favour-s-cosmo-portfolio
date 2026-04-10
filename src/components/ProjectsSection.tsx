@@ -2,28 +2,28 @@ import { ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Project One",
-    category: "Mobile App",
-    desc: "A brief description of this project and what it achieves.",
-    image: null,
+    title: "TranshubCars",
+    category: "Mobile & Web App",
+    desc: "A comprehensive platform for car inspections, sales, and management, featuring robust visitor tracking and email automation.",
+    link: "https://transhub.cars",
   },
   {
-    title: "Project Two",
-    category: "Branding",
-    desc: "A brief description of this project and what it achieves.",
-    image: null,
+    title: "AI Innovation Hub",
+    category: "Digital Platform",
+    desc: "A modern platform for AI exploration, featuring live chat integration and personalized user experiences.",
+    link: "https://aihub.cosmointentlab.com",
   },
   {
-    title: "Project Three",
-    category: "Mobile App",
-    desc: "A brief description of this project and what it achieves.",
-    image: null,
+    title: "Cosmo Intent Lab Branding",
+    category: "Branding & Strategy",
+    desc: "Crafting ethereal digital experiences and cohesive brand identities for modern businesses.",
+    link: "https://cosmoint24.com.ng",
   },
   {
-    title: "Project Four",
-    category: "Digital Strategy",
-    desc: "A brief description of this project and what it achieves.",
-    image: null,
+    title: "Professional Invoice System",
+    category: "FinTech",
+    desc: "Branded invoicing and financial management system designed for professional service providers.",
+    link: "#",
   },
 ];
 
@@ -54,7 +54,9 @@ const ProjectsSection = () => {
                 </h3>
                 <p className="text-muted-foreground text-sm mb-4">{p.desc}</p>
                 <a
-                  href="#"
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
                 >
                   View Project <ExternalLink className="w-3.5 h-3.5" />
