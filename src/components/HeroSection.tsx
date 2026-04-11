@@ -51,20 +51,19 @@ const HeroSection = () => {
 
           <div className="relative hidden lg:flex justify-end">
             <div className="relative group">
-              <div className="w-[420px] h-[500px] bg-primary/5 border border-border rounded-[2.5rem] overflow-hidden flex items-center justify-center relative">
-                {/* Minimalist Tech Pattern */}
-                <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity duration-700">
-                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--primary)_1px,_transparent_1px)] bg-[size:32px_32px]" />
-                </div>
-                <div className="z-10 text-primary/40 font-mono text-9xl font-bold tracking-tighter opacity-20 group-hover:opacity-40 transition-opacity duration-700 select-none">
-                  F
-                </div>
+              <div className="w-[420px] h-[520px] bg-secondary border border-border rounded-[2.5rem] overflow-hidden relative shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
+                <img 
+                  src="/olorunfemi favour.jpg" 
+                  alt="Olorunfemi Favour" 
+                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-110 group-hover:scale-100"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-60" />
               </div>
-              <div className="absolute -bottom-5 -left-8 bg-background border border-border rounded-2xl px-6 py-4 shadow-xl">
+              <div className="absolute -bottom-5 -left-8 bg-background border border-border rounded-2xl px-6 py-4 shadow-xl z-20">
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">Role</p>
                 <p className="font-semibold text-foreground text-sm mt-0.5">Mobile Developer & CTO</p>
               </div>
-              <div className="absolute top-8 -right-6 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-xl">
+              <div className="absolute top-8 -right-6 bg-primary text-primary-foreground rounded-2xl px-5 py-3 shadow-xl z-20">
                 <p className="text-lg font-mono font-bold hover:scale-110 transition-transform">&lt;/&gt;</p>
               </div>
             </div>
