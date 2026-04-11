@@ -7,12 +7,12 @@ const HeroSection = () => {
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up">
               <span className="w-2 h-2 rounded-full bg-primary" />
               <a 
-                href="https://cosmoint24.com.ng" 
+                href="https://www.cosmoint24.com.ng" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="hover:text-primary transition-colors"
               >
-                CTO at Cosmo Intent Lab
+                CTO at Cosmo Intents Lab
               </a>
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 opacity-0 animate-fade-in-up-1">
@@ -24,12 +24,12 @@ const HeroSection = () => {
               Mobile developer and tech leader building performant applications
               and driving digital growth through{" "}
               <a 
-                href="https://cosmoint24.com.ng" 
+                href="https://www.cosmoint24.com.ng" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-foreground font-bold hover:text-primary transition-colors decoration-primary underline-offset-4 hover:underline"
               >
-                Cosmo Intent Lab
+                Cosmo Intents Lab
               </a> — a branding
               company crafting ethereal digital experiences.
             </p>

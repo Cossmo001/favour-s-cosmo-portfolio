@@ -12,12 +12,12 @@ const AboutSection = () => {
             <p className="text-muted-foreground leading-relaxed mb-4">
               As the CTO of{" "}
               <a 
-                href="https://cosmoint24.com.ng" 
+                href="https://www.cosmoint24.com.ng" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-foreground font-semibold hover:text-primary transition-colors"
               >
-                Cosmo Intent Lab
+                Cosmo Intents Lab
               </a>
               , I lead the technical vision behind a branding company
               that helps businesses build their digital identity. My expertise spans mobile development,
@@ -42,15 +42,32 @@ const AboutSection = () => {
             </div>
           </div>
 
-          <div className="hidden lg:block relative">
-            <div className="w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border border-border">
-              <img 
-                src="/olorunfemi favour.jpg" 
-                alt="Olorunfemi Favour" 
-                className="w-full h-full object-cover"
-              />
+          <div className="hidden lg:flex items-center justify-center relative">
+            <div className="w-full aspect-square max-w-md mx-auto relative group">
+              {/* Animated Geometric Shape */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-64 h-64 border-2 border-primary/20 rounded-full animate-[spin_10s_linear_infinite]" />
+                <div className="absolute w-48 h-48 border-2 border-primary/40 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] animate-[spin_7s_linear_infinite_reverse] group-hover:animate-[spin_3s_linear_infinite_reverse] transition-all duration-700" />
+                <div className="absolute w-32 h-32 bg-primary/10 rounded-full blur-2xl animate-pulse" />
+                <div className="z-10 text-primary font-mono text-xl font-bold tracking-[0.2em] group-hover:scale-110 transition-transform duration-500">
+                  COSMO
+                </div>
+              </div>
+              
+              {/* Floating Particles */}
+              {[...Array(6)].map((_, i) => (
+                <div
+                  key={i}
+                  className="absolute w-2 h-2 bg-primary/30 rounded-full animate-float"
+                  style={{
+                    top: `${Math.random() * 100}%`,
+                    left: `${Math.random() * 100}%`,
+                    animationDelay: `${i * 0.5}s`,
+                    animationDuration: `${3 + Math.random() * 2}s`
+                  }}
+                />
+              ))}
             </div>
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 rounded-2xl -z-10 animate-pulse" />
           </div>
         </div>
       </div>

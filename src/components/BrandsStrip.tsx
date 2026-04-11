@@ -1,5 +1,5 @@
 const brands = [
-  { name: "Cosmo Intent Lab", image: "/brands/cosmointlogotype2.png", link: "https://cosmoint24.com.ng" },
+  { name: "Cosmo Intents Lab", image: "/brands/cosmointlogotype2.png", link: "https://www.cosmoint24.com.ng" },
   { name: "Transhub Global Resources", image: "/brands/Transhub Global Resouces.png", link: "https://transhub.cars" },
   { name: "Fedatify", image: "/brands/fedatify.png", link: "#" },
   { name: "AFS Foundation", image: "/brands/Afs foundation.png", link: "#" },
