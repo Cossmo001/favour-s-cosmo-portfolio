@@ -54,7 +54,7 @@ const ProjectsSection = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img 
                   src={p.image || "/placeholder.svg"} 
-                  alt={p.title} 
+                  alt={`${p.title} - Project by Olorunfemi Favour`} 
                   className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 flex items-center justify-center p-6 bg-background/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">

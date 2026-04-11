@@ -54,7 +54,7 @@ const HeroSection = () => {
               <div className="w-[420px] h-[520px] bg-secondary border border-border rounded-[2.5rem] overflow-hidden relative shadow-2xl transition-transform duration-500 group-hover:-translate-y-2">
                 <img 
                   src="/olorunfemi favour.jpg" 
-                  alt="Olorunfemi Favour" 
+                  alt="Olorunfemi Favour - Professional Mobile Developer and CTO at Cosmo Intents Lab" 
                   className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 ease-in-out scale-110 group-hover:scale-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-60" />

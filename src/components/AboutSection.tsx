@@ -19,7 +19,7 @@ const AboutSection = () => {
               >
                 Cosmo Intents Lab
               </a>
-              , I lead the technical vision behind a branding company
+              , I, <span className="font-semibold text-foreground">Olorunfemi Favour</span>, lead the technical vision behind a branding company
               that helps businesses build their digital identity. My expertise spans mobile development,
               digital strategy, and team leadership.
             </p>
