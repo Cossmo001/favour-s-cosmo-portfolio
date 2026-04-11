@@ -37,32 +37,42 @@ const BlogSection = () => {
           {blogPosts.map((post, i) => (
             <div
               key={i}
-              className="group flex flex-col p-8 rounded-2xl border border-border bg-background hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+              className="group flex flex-col rounded-2xl border border-border bg-background hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
             >
-              <div className="flex items-center gap-4 mb-6 text-xs text-muted-foreground">
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5" />
-                  {post.date}
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <User className="w-3.5 h-3.5" />
-                  {post.author}
-                </div>
+              <div className="aspect-[16/9] relative overflow-hidden bg-muted">
+                <img 
+                  src="/placeholder.svg" 
+                  alt={post.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-60"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               </div>
-              <h3 className="text-xl font-semibold mb-4 group-hover:text-primary transition-colors line-clamp-2">
-                {post.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed mb-8 flex-grow line-clamp-3">
-                {post.excerpt}
-              </p>
-              <a
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
-              >
-                Read Full Story <ExternalLink className="w-3.5 h-3.5" />
-              </a>
+              <div className="p-8 pt-0 -mt-8 relative z-10">
+                <div className="flex items-center gap-4 mb-4 text-xs text-muted-foreground bg-background/50 backdrop-blur-sm w-fit px-3 py-1 rounded-full border border-border">
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5" />
+                    {post.date}
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <User className="w-3.5 h-3.5" />
+                    {post.author}
+                  </div>
+                </div>
+                <h3 className="text-xl font-semibold mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed mb-6 flex-grow line-clamp-3 text-sm">
+                  {post.excerpt}
+                </p>
+                <a
+                  href={post.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                >
+                  Read Full Story <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
           ))}
         </div>

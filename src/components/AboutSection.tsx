@@ -42,8 +42,15 @@ const AboutSection = () => {
             </div>
           </div>
 
-          <div className="hidden lg:block">
-            <div className="w-full aspect-square max-w-md mx-auto rounded-3xl bg-secondary border border-border" />
+          <div className="hidden lg:block relative">
+            <div className="w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden border border-border">
+              <img 
+                src="/olorunfemi favour.jpg" 
+                alt="Olorunfemi Favour" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/10 rounded-2xl -z-10 animate-pulse" />
           </div>
         </div>
       </div>
