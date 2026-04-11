@@ -69,7 +69,7 @@ const BlogSection = () => {
         
         <div className="mt-16 text-center">
           <a
-            href="https://www.cosmoint24.com.ng"
+            href="https://www.cosmoint24.com.ng/blog"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full border border-border text-foreground font-medium hover:border-primary hover:text-primary transition-colors"

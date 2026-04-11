@@ -6,28 +6,32 @@ const projects = [
     category: "Mobile & Web App",
     desc: "A comprehensive platform for car inspections, sales, and management, featuring robust visitor tracking and email automation.",
     link: "https://transhub.cars",
-    image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&q=80&w=800",
+    image: "/brands/Transhub Global Resouces.png",
+    bgColor: "bg-blue-500/5",
   },
   {
     title: "AI Innovation Hub",
     category: "Digital Platform",
     desc: "A modern platform for AI exploration, featuring live chat integration and personalized user experiences.",
     link: "https://aihub.cosmointentlab.com",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+    image: "/brands/fedatify.png",
+    bgColor: "bg-teal-500/5",
   },
   {
     title: "Cosmo Intents Lab Branding",
     category: "Branding & Strategy",
     desc: "Crafting ethereal digital experiences and cohesive brand identities for modern businesses.",
     link: "https://www.cosmoint24.com.ng",
-    image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=800",
+    image: "/brands/cosmointlogotype2.png",
+    bgColor: "bg-primary/5",
   },
   {
     title: "Professional Invoice System",
     category: "FinTech",
     desc: "Branded invoicing and financial management system designed for professional service providers.",
     link: "#",
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+    image: "/brands/sp systems and net solutions.png",
+    bgColor: "bg-slate-500/5",
   },
 ];
 
@@ -46,15 +50,15 @@ const ProjectsSection = () => {
               key={i}
               className="group rounded-2xl overflow-hidden bg-background border border-border hover:shadow-xl transition-all duration-300"
             >
-              <div className="aspect-video relative overflow-hidden bg-muted flex items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-transparent z-10" />
+              <div className={`aspect-video relative overflow-hidden flex items-center justify-center p-12 ${p.bgColor || "bg-muted"}`}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <img 
                   src={p.image || "/placeholder.svg"} 
                   alt={p.title} 
-                  className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain filter drop-shadow-lg group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                   <span className="text-white font-bold text-shadow-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">View Case Study</span>
+                <div className="absolute inset-0 flex items-center justify-center p-6 bg-background/20 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                   <span className="text-primary font-bold tracking-wider uppercase text-xs border border-primary/50 px-4 py-2 rounded-full bg-background/80 shadow-sm">View Case Study</span>
                 </div>
               </div>
               <div className="p-8">
