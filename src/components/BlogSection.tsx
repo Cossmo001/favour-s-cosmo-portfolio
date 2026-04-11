@@ -2,18 +2,18 @@ import { ExternalLink, Calendar, User } from "lucide-react";
 
 const blogPosts = [
   {
-    title: "The Future of Digital Branding in 2026",
-    excerpt: "Exploring how AI and immersive technologies are reshaping the way brands connect with their audiences.",
+    title: "The Psychology of a Minimalist Motion",
+    excerpt: "Understanding the balance between simplicity and motion to create ethereal digital experiences.",
     author: "Favour Olorunfemi",
-    date: "April 10, 2026",
-    link: "https://cosmoint24.com.ng/blog/future-of-digital-branding",
+    date: "April 11, 2026",
+    link: "https://cosmoint24.com.ng/blog/the-psychology-of-a-minimalist-motion",
   },
   {
     title: "Building Scalable Mobile Apps with React Native",
     excerpt: "A deep dive into the architecture and best practices for creating performant cross-platform applications.",
     author: "Favour Olorunfemi",
     date: "March 25, 2026",
-    link: "https://cosmoint24.com.ng/blog/scalable-mobile-apps",
+    link: "https://cosmoint24.com.ng/blog/building-scalable-mobile-apps-with-react-native",
   },
   {
     title: "Strategic Growth: Beyond Just Development",

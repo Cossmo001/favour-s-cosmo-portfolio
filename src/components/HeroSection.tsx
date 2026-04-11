@@ -51,8 +51,12 @@ const HeroSection = () => {
 
           <div className="relative hidden lg:flex justify-end">
             <div className="relative">
-              <div className="w-[420px] h-[500px] bg-primary/5 border border-border rounded-[2.5rem] overflow-hidden flex items-center justify-center">
-                <span className="text-muted-foreground/30 text-sm">Your Photo</span>
+              <div className="w-[420px] h-[500px] bg-primary/5 border border-border rounded-[2.5rem] overflow-hidden flex items-center justify-center relative">
+                <img 
+                  src="/olorunfemi favour.jpg" 
+                  alt="Olorunfemi Favour" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="absolute -bottom-5 -left-8 bg-background border border-border rounded-2xl px-6 py-4 shadow-xl">
                 <p className="text-xs text-muted-foreground uppercase tracking-wider">Role</p>

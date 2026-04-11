@@ -42,8 +42,9 @@ const ProjectsSection = () => {
               key={i}
               className="group rounded-2xl overflow-hidden bg-background border border-border hover:shadow-xl transition-all duration-300"
             >
-              <div className="aspect-video bg-muted flex items-center justify-center">
-                <span className="text-muted-foreground/40 text-sm">Project Image</span>
+              <div className="aspect-video relative overflow-hidden bg-muted flex items-center justify-center">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+                <span className="text-muted-foreground/40 text-sm font-medium z-10">{p.title} Preview</span>
               </div>
               <div className="p-8">
                 <span className="text-xs font-medium uppercase tracking-wider text-primary">
