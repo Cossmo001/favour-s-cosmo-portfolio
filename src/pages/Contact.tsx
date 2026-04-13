@@ -37,8 +37,8 @@ const Contact = () => {
                     <Linkedin className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="font-bold">LinkedIn</h3>
-                  <a href="https://www.linkedin.com/in/olorunfemifavour" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                    olorunfemifavour
+                  <a href="https://www.linkedin.com/in/olorunfemi-favour-49582a288/" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors block break-all">
+                    olorunfemi-favour
                   </a>
                 </div>
                 <div className="p-8 rounded-3xl border border-border bg-secondary/20 space-y-4">
@@ -46,8 +46,8 @@ const Contact = () => {
                     <Github className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="font-bold">GitHub</h3>
-                  <a href="https://github.com/Cossmo001" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
-                    Cossmo001
+                  <a href="https://github.com/cosmo-0910" target="_blank" rel="noopener noreferrer" className="text-sm text-muted-foreground hover:text-primary transition-colors block">
+                    cosmo-0910
                   </a>
                 </div>
                 <div className="p-8 rounded-3xl border border-border bg-secondary/20 space-y-4">
