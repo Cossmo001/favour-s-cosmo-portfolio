@@ -1,4 +1,5 @@
 import { ExternalLink, Calendar, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const blogPosts = [
   {
@@ -67,7 +68,13 @@ const BlogSection = () => {
           ))}
         </div>
         
-        <div className="mt-16 text-center">
+        <div className="mt-16 flex flex-wrap justify-center gap-4">
+          <Link
+            to="/blog"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+          >
+            View All Posts
+          </Link>
           <a
             href="https://www.cosmoint24.com.ng/blog"
             target="_blank"

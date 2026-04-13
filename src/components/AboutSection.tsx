@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+
 const AboutSection = () => {
   return (
     <section id="about" className="py-24 px-6">
@@ -27,6 +30,13 @@ const AboutSection = () => {
               I combine strategic marketing insights with technical prowess to deliver impactful
               results and foster sustainable digital success for individuals and organisations.
             </p>
+
+            <Link 
+              to="/about" 
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-border text-sm font-bold hover:border-primary hover:text-primary transition-all mb-12 group"
+            >
+              Read More <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
 
             <div className="grid grid-cols-3 gap-6">
               {[

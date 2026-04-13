@@ -1,35 +1,53 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/", isHash: true },
+  { label: "About", href: "/about" },
+  { label: "Services", href: "/#services", isHash: true },
+  { label: "Projects", href: "/projects" },
+  { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else if (pathname === "/") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [pathname, hash]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-        <a href="#home" className="text-xl font-semibold text-primary">
+        <Link to="/" className="text-xl font-semibold text-primary">
           Olorunfemi Favour.
-        </a>
+        </Link>
 
         <div className="hidden md:flex items-center gap-10">
           <div className="flex items-center gap-8">
             {links.map((link) => (
-              <a
+              <Link
                 key={link.label}
-                href={link.href}
-                className="text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
+                to={link.href}
+                className={`text-sm font-medium transition-colors ${
+                  pathname === link.href || (link.isHash && pathname === "/" && hash === link.href.split("#")[1])
+                    ? "text-primary"
+                    : "text-foreground/70 hover:text-primary"
+                }`}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
           <ThemeToggle />
@@ -50,14 +68,14 @@ const Navbar = () => {
       {open && (
         <div className="md:hidden bg-background border-t border-border px-6 py-4 space-y-4">
           {links.map((link) => (
-            <a
+            <Link
               key={link.label}
-              href={link.href}
+              to={link.href}
               onClick={() => setOpen(false)}
               className="block text-sm font-medium text-foreground/70 hover:text-primary transition-colors"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
       )}
