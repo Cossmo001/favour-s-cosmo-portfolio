@@ -28,8 +28,8 @@ const Contact = () => {
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="font-bold">Email Me</h3>
-                  <a href="mailto:python.s2005@gmail.com" className="text-sm text-muted-foreground hover:text-primary transition-colors block break-all">
-                    python.s2005@gmail.com
+                  <a href="mailto:olorunfemifavour@cosmoint24.com.ng" className="text-sm text-muted-foreground hover:text-primary transition-colors block break-all">
+                    olorunfemifavour@cosmoint24.com.ng
                   </a>
                 </div>
                 <div className="p-8 rounded-3xl border border-border bg-secondary/20 space-y-4">
