@@ -1,5 +1,5 @@
 const socialLinks = [
-  { name: "Twitter", url: "#" },
+  { name: "Twitter", url: "https://x.com/xosmoint" },
   { name: "LinkedIn", url: "https://www.linkedin.com/in/olorunfemi-favour-49582a288/" },
   { name: "GitHub", url: "https://github.com/cosmo-0910" },
 ];
@@ -20,5 +20,5 @@ const Footer = () => (
     </div>
   </footer>
 );
-l
+
 export default Footer;
