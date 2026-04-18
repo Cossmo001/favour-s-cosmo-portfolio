@@ -23,6 +23,8 @@ const ContactSection = () => {
     }
 
     setLoading(true);
+    const loadingToast = toast.loading("Connecting to Cosmo Intents Lab...");
+    
     try {
       const { error } = await supabase
         .from("project_messages")
@@ -35,11 +37,16 @@ const ContactSection = () => {
 
       if (error) throw error;
 
-      toast.success("Message sent successfully! I'll get back to you soon.");
+      toast.dismiss(loadingToast);
+      toast.success("Message delivered! It's now visible in my admin dashboard.", {
+        description: "I'll respond as soon as I see it.",
+        duration: 5000,
+      });
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (error: any) {
       console.error("Submission error:", error);
-      toast.error("Failed to send message. Please try again later.");
+      toast.dismiss(loadingToast);
+      toast.error("Handshake failed. Please try again or email me directly.");
     } finally {
       setLoading(false);
     }

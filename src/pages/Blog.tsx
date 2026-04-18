@@ -1,35 +1,26 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ExternalLink, Calendar, Search } from "lucide-react";
-
-const blogPosts = [
-  {
-    title: "Psychology of a Minimalist Motion",
-    excerpt: "Understanding the balance between simplicity and motion to create ethereal digital experiences.",
-    author: "Favour Olorunfemi",
-    date: "April 11, 2026",
-    category: "Design",
-    link: "https://www.cosmoint24.com.ng/blog/psychology-minimalist-motion",
-  },
-  {
-    title: "The Golden Ratio in Digital Layouts",
-    excerpt: "Exploring the mathematical perfection behind balanced and visually pleasing digital architectures.",
-    author: "Favour Olorunfemi",
-    date: "April 11, 2026",
-    category: "Architecture",
-    link: "https://www.cosmoint24.com.ng/blog/golden-ratio-digital-layouts",
-  },
-  {
-    title: "Strategic Growth: Beyond Just Development",
-    excerpt: "How to combine technical expertise with marketing insights to drive sustainable business success.",
-    author: "Favour Olorunfemi",
-    date: "March 12, 2026",
-    category: "Strategy",
-    link: "https://www.cosmoint24.com.ng/blog/strategic-growth",
-  },
-];
+import { ExternalLink, Calendar, Search, Loader2 } from "lucide-react";
+import { usePortfolioData } from "@/hooks/usePortfolioData";
+import { format } from "date-fns";
 
 const Blog = () => {
+  const { blogPosts, isLoading, isError } = usePortfolioData();
+
+  const displayPosts = blogPosts || [];
+
+  if (isError) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col pt-32">
+        <Navbar />
+        <main className="flex-grow flex items-center justify-center">
+          <p className="text-muted-foreground">Failed to load blog posts. Please try again later.</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -60,32 +51,45 @@ const Blog = () => {
 
           <div className="grid lg:grid-cols-3 gap-12 mb-32">
             <div className="lg:col-span-2 space-y-12">
-              {blogPosts.map((post, i) => (
-                <article 
-                  key={i} 
-                  className={`group p-8 rounded-3xl border border-border bg-secondary/20 hover:bg-secondary/40 transition-all animate-fade-in-up-${(i % 3) + 1}`}
-                >
-                  <div className="flex items-center gap-4 mb-6 text-xs text-muted-foreground font-medium uppercase tracking-widest">
-                    <span className="text-primary">{post.category}</span>
-                    <span>•</span>
-                    <span className="flex items-center gap-1.5"><Calendar className="w-3.5 h-3.5" /> {post.date}</span>
-                  </div>
-                  <h2 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight">
-                    {post.title}
-                  </h2>
-                  <p className="text-muted-foreground leading-relaxed mb-8">
-                    {post.excerpt}
-                  </p>
-                  <a
-                    href={post.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-primary transition-colors"
+              {isLoading ? (
+                <div className="flex items-center justify-center py-20">
+                  <Loader2 className="w-10 h-10 animate-spin text-primary" />
+                </div>
+              ) : displayPosts.length === 0 ? (
+                <div className="p-12 text-center rounded-3xl border border-dashed border-border">
+                  <p className="text-muted-foreground">No blog posts found. Check back later!</p>
+                </div>
+              ) : (
+                displayPosts.map((post, i) => (
+                  <article 
+                    key={post.id} 
+                    className={`group p-8 rounded-3xl border border-border bg-secondary/20 hover:bg-secondary/40 transition-all animate-fade-in-up-${(i % 3) + 1}`}
                   >
-                    Read Full Article <ExternalLink className="w-4 h-4" />
-                  </a>
-                </article>
-              ))}
+                    <div className="flex items-center gap-4 mb-6 text-xs text-muted-foreground font-medium uppercase tracking-widest">
+                      <span className="text-primary">{post.category}</span>
+                      <span>•</span>
+                      <span className="flex items-center gap-1.5">
+                        <Calendar className="w-3.5 h-3.5" /> 
+                        {post.published_at ? format(new Date(post.published_at), 'MMMM dd, yyyy') : 'Recently Published'}
+                      </span>
+                    </div>
+                    <h2 className="text-3xl font-bold mb-4 group-hover:text-primary transition-colors leading-tight">
+                      {post.title}
+                    </h2>
+                    <p className="text-muted-foreground leading-relaxed mb-8">
+                      {post.excerpt}
+                    </p>
+                    <a
+                      href={post.external_link || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-primary transition-colors"
+                    >
+                      Read Full Article <ExternalLink className="w-4 h-4" />
+                    </a>
+                  </article>
+                ))
+              )}
             </div>
 
             <aside className="space-y-12 h-fit lg:sticky lg:top-32">
