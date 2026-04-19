@@ -38,8 +38,8 @@ const ContactSection = () => {
 
       if (chatError) throw chatError;
 
-      // 2. Insert the first message
-      const { error: msgError } = await supabase
+      // 2. Insert the first message from visitor
+      await supabase
         .from("portfolio_chat_messages")
         .insert([{
           chat_id: chat.id,
@@ -47,15 +47,23 @@ const ContactSection = () => {
           content: `[Subject: ${formData.subject}]\n\n${formData.message}`
         }]);
 
-      if (msgError) throw msgError;
+      // 3. Insert automatic response with link
+      const trackingUrl = `https://olorunfemifavour.cosmoint24.com.ng/chat?id=${chat.tracking_id}`;
+      await supabase
+        .from("portfolio_chat_messages")
+        .insert([{
+          chat_id: chat.id,
+          sender_type: 'admin',
+          content: `Hello ${formData.name.split(' ')[0]}! I've received your message. You can use this link to return to this chat at any time: ${trackingUrl}`
+        }]);
+
+      // Update chat last message to the welcome message
+      await supabase
+        .from("portfolio_chats")
+        .update({ last_message: "Automatic Welcome Sent" })
+        .eq("id", chat.id);
 
       toast.dismiss(loadingToast);
-      toast.success("Message delivered! Redicting to our live chat...", {
-        icon: <MessageCircle className="w-4 h-4 text-green-500" />
-      });
-      
-      // Store chat info for this session
-      localStorage.setItem(`portfolio_chat_${chat.tracking_id}`, JSON.stringify(chat));
 
       // 3. Redirect to the chat page
       setTimeout(() => {
