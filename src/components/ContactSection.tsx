@@ -1,13 +1,12 @@
-import { Mail, MapPin, Phone, Loader2 } from "lucide-react";
+import { Mail, MapPin, Phone, Loader2, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-
-// This is the dedicated ID for the Personal Portfolio project in the Cosmo Intents Admin
-const PORTFOLIO_ORDER_ID = "f7a2b9c0-e1d2-4f3a-8b4c-9d0e1f2a3b4c";
+import { useNavigate } from "react-router-dom";
 
 const ContactSection = () => {
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,26 +22,46 @@ const ContactSection = () => {
     }
 
     setLoading(true);
-    const loadingToast = toast.loading("Connecting to Cosmo Intents Lab...");
+    const loadingToast = toast.loading("Initializing secure chat session...");
     
     try {
-      const { error } = await supabase
-        .from("project_messages")
+      // 1. Create or get chat session
+      const { data: chat, error: chatError } = await supabase
+        .from("portfolio_chats")
         .insert([{
-          order_id: PORTFOLIO_ORDER_ID,
-          sender_type: 'client',
-          message: `[From: ${formData.name}] - ${formData.subject}\n\n${formData.message}`,
-          is_read: false
+          visitor_name: formData.name,
+          visitor_email: formData.email,
+          last_message: formData.message
+        }])
+        .select()
+        .single();
+
+      if (chatError) throw chatError;
+
+      // 2. Insert the first message
+      const { error: msgError } = await supabase
+        .from("portfolio_chat_messages")
+        .insert([{
+          chat_id: chat.id,
+          sender_type: 'visitor',
+          content: `[Subject: ${formData.subject}]\n\n${formData.message}`
         }]);
 
-      if (error) throw error;
+      if (msgError) throw msgError;
 
       toast.dismiss(loadingToast);
-      toast.success("Message delivered! It's now visible in my admin dashboard.", {
-        description: "I'll respond as soon as I see it.",
-        duration: 5000,
+      toast.success("Message delivered! Redicting to our live chat...", {
+        icon: <MessageCircle className="w-4 h-4 text-green-500" />
       });
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      
+      // Store chat info for this session
+      localStorage.setItem(`portfolio_chat_${chat.tracking_id}`, JSON.stringify(chat));
+
+      // 3. Redirect to the chat page
+      setTimeout(() => {
+        navigate(`/chat?id=${chat.tracking_id}`);
+      }, 1500);
+
     } catch (error: any) {
       console.error("Submission error:", error);
       toast.dismiss(loadingToast);
