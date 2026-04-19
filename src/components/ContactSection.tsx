@@ -57,10 +57,10 @@ const ContactSection = () => {
           content: `Hello ${formData.name.split(' ')[0]}! I've received your message. You can use this link to return to this chat at any time: ${trackingUrl}`
         }]);
 
-      // Update chat last message to the welcome message
+      // Update chat last message to the actual message snippet
       await supabase
         .from("portfolio_chats")
-        .update({ last_message: "Automatic Welcome Sent" })
+        .update({ last_message: formData.message })
         .eq("id", chat.id);
 
       toast.dismiss(loadingToast);
