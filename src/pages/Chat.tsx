@@ -120,10 +120,13 @@ const Chat = () => {
       if (error) throw error;
       setNewMessage("");
       
-      // Update last message in chat
+      // Update parent chat for sorting
       await supabase
         .from("portfolio_chats")
-        .update({ last_message: newMessage.trim(), updated_at: new Date().toISOString() })
+        .update({ 
+          last_message: newMessage.trim(),
+          updated_at: new Date().toISOString()
+        })
         .eq("id", chat.id);
 
     } catch (error) {
