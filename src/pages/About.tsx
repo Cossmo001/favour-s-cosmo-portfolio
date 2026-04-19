@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { CheckCircle2, Award, Rocket, Code2, Globe, Cpu, Loader2 } from "lucide-react";
+import { CheckCircle2, Award, Rocket, Code2, Globe, Cpu, Loader2, Briefcase } from "lucide-react";
 import { usePortfolioData } from "@/hooks/usePortfolioData";
 
 const iconMap: Record<string, any> = {
@@ -9,6 +9,63 @@ const iconMap: Record<string, any> = {
   rocket: Rocket,
   cpu: Cpu,
 };
+
+const experience = [
+  {
+    company: "Cosmo Intents Lab (Cosmoint)",
+    role: "CTO & Founder",
+    period: "Present",
+    description: "Leading technical vision and strategy for digital brand experiences."
+  },
+  {
+    company: "Fetadify",
+    role: "Senior Developer",
+    period: "2024 - Present",
+    description: "Contributing to GIS-based software solutions as a senior technical lead."
+  },
+  {
+    company: "Marolan Group",
+    role: "Lead Marketer & Brand Manager",
+    period: "2024 - Present",
+    description: "Spearheading marketing initiatives and brand consistency across diverse channels."
+  },
+  {
+    company: "Transhub Global Resources",
+    role: "Sales & Importation Lead",
+    period: "2024 - Present",
+    description: "Managing automotive sales, spare parts, and importation workflows."
+  },
+  {
+    company: "AFS Foundation",
+    role: "Marketing Assistant",
+    period: "2024 - Present",
+    description: "Supporting community empowerment and aid initiatives across Nigeria."
+  },
+  {
+    company: "Serene",
+    role: "Brand Creator",
+    period: "2024 - Present",
+    description: "Crafting unique brand identities and visual strategies."
+  },
+  {
+    company: "SP Systems and Net Solutions",
+    role: "Digital Marketing Instructor",
+    period: "2023 - Early 2024",
+    description: "Mentoring students in digital marketing strategies and tools."
+  },
+  {
+    company: "SP Systems and Net Solutions",
+    role: "Intern",
+    period: "2022 - 2023",
+    description: "Gaining hands-on experience in software development and networking."
+  },
+  {
+    company: "SP Systems and Net Solutions",
+    role: "Trainee",
+    period: "2021 - 2022",
+    description: "Initial technical training and skill acquisition."
+  }
+];
 
 const About = () => {
   const { settings, isLoading, isError } = usePortfolioData();
@@ -104,6 +161,33 @@ const About = () => {
                     <p className="text-2xl font-bold italic font-serif leading-none">3+</p>
                     <p className="text-xs uppercase tracking-widest mt-1 opacity-80">Years Excellence</p>
                   </div>
+                </div>
+              </div>
+
+              {/* Experience Section */}
+              <div className="mb-32 animate-fade-in-up">
+                <h2 className="text-4xl font-bold mb-16 text-center">Professional Experience</h2>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {experience.map((exp: any, i: number) => (
+                    <div 
+                      key={i} 
+                      className="p-8 rounded-2xl border border-border bg-secondary/10 hover:bg-secondary/30 transition-all group backdrop-blur-sm"
+                    >
+                      <div className="flex justify-between items-start mb-6">
+                        <div className="p-3 rounded-xl bg-background border border-border group-hover:border-primary/50 transition-colors">
+                          <Briefcase className="w-6 h-6 text-primary" />
+                        </div>
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                          {exp.period}
+                        </span>
+                      </div>
+                      <h3 className="text-xl font-bold mb-1">{exp.role}</h3>
+                      <p className="text-primary text-sm font-medium mb-4 italic">{exp.company}</p>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {exp.description}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
