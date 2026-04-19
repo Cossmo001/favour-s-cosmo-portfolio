@@ -1,9 +1,93 @@
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, Linkedin, Github, Send, MessageSquare } from "lucide-react";
+import { Mail, Linkedin, Github, Send, MessageSquare, Loader2, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+
+    setLoading(true);
+    const loadingToast = toast.loading("Initializing secure chat session...");
+    
+    try {
+      // 1. Create or get chat session
+      const { data: chat, error: chatError } = await supabase
+        .from("portfolio_chats")
+        .insert([{
+          visitor_name: formData.name,
+          visitor_email: formData.email,
+          last_message: formData.message
+        }])
+        .select()
+        .single();
+
+      if (chatError) throw chatError;
+
+      // 2. Insert the first message from visitor
+      await supabase
+        .from("portfolio_chat_messages")
+        .insert([{
+          chat_id: chat.id,
+          sender_type: 'visitor',
+          content: `[Subject: ${formData.subject}]\n\n${formData.message}`
+        }]);
+
+      // 3. Insert automatic response with link
+      const trackingUrl = `${window.location.origin}/chat?id=${chat.tracking_id}`;
+      await supabase
+        .from("portfolio_chat_messages")
+        .insert([{
+          chat_id: chat.id,
+          sender_type: 'admin',
+          content: `Hello ${formData.name.split(' ')[0]}! I've received your message. You can use this link to return to this chat at any time: ${trackingUrl}`
+        }]);
+
+      // Update chat last message to the welcome message
+      await supabase
+        .from("portfolio_chats")
+        .update({ last_message: "Automatic Welcome Sent" })
+        .eq("id", chat.id);
+
+      toast.dismiss(loadingToast);
+      toast.success("Message delivered! Redirecting to our live chat...", {
+        icon: <MessageCircle className="w-4 h-4 text-green-500" />
+      });
+      
+      // Store chat info for this session
+      localStorage.setItem(`portfolio_chat_${chat.tracking_id}`, JSON.stringify(chat));
+
+      // 4. Redirect to the chat page
+      setTimeout(() => {
+        navigate(`/chat?id=${chat.tracking_id}`);
+      }, 1500);
+
+    } catch (error: any) {
+      console.error("Submission error:", error);
+      toast.dismiss(loadingToast);
+      toast.error("Handshake failed. Please try again or email me directly.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -73,13 +157,16 @@ const Contact = () => {
             </div>
 
             <div className="p-10 md:p-12 rounded-[2.5rem] border border-border bg-background shadow-2xl animate-fade-in-up-2">
-              <form className="space-y-8">
+              <form className="space-y-8" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-8">
                   <div className="space-y-3">
                     <label className="text-xs font-bold uppercase tracking-widest px-1">Name</label>
                     <input 
                       type="text" 
+                      required
                       placeholder="Your Name" 
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full bg-secondary/50 border-none rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary transition-all"
                     />
                   </div>
@@ -87,7 +174,10 @@ const Contact = () => {
                     <label className="text-xs font-bold uppercase tracking-widest px-1">Email</label>
                     <input 
                       type="email" 
+                      required
                       placeholder="Email Address" 
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full bg-secondary/50 border-none rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary transition-all"
                     />
                   </div>
@@ -97,6 +187,8 @@ const Contact = () => {
                   <input 
                     type="text" 
                     placeholder="Message Subject" 
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full bg-secondary/50 border-none rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary transition-all"
                   />
                 </div>
@@ -104,13 +196,26 @@ const Contact = () => {
                   <label className="text-xs font-bold uppercase tracking-widest px-1">Message</label>
                   <textarea 
                     rows={6}
+                    required
                     placeholder="How can I help you?" 
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full bg-secondary/50 border-none rounded-2xl px-5 py-4 text-sm focus:ring-2 focus:ring-primary transition-all resize-none"
                   />
                 </div>
-                <Button className="w-full py-7 rounded-2xl text-lg font-bold group">
-                  Send Message
-                  <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                <Button 
+                  type="submit"
+                  disabled={loading}
+                  className="w-full py-7 rounded-2xl text-lg font-bold group"
+                >
+                  {loading ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="w-5 h-5 ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
