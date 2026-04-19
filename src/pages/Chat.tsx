@@ -20,8 +20,23 @@ const Chat = () => {
       navigate("/");
       return;
     }
-    fetchChatAndMessages();
-    subscribeToMessages();
+
+    let channel: any;
+
+    const init = async () => {
+      const chatData = await fetchChatAndMessages();
+      if (chatData?.id) {
+        channel = subscribeToMessages(chatData.id);
+      }
+    };
+
+    init();
+
+    return () => {
+      if (channel) {
+        supabase.removeChannel(channel);
+      }
+    };
   }, [trackingId]);
 
   useEffect(() => {
@@ -52,15 +67,17 @@ const Chat = () => {
 
       if (msgsError) throw msgsError;
       setMessages(msgs || []);
+      return chatData;
     } catch (error) {
       console.error("Chat fetch error:", error);
       navigate("/");
+      return null;
     } finally {
       setLoading(false);
     }
   };
 
-  const subscribeToMessages = () => {
+  const subscribeToMessages = (chatId: string) => {
     const channel = supabase
       .channel(`chat_${trackingId}`)
       .on(
@@ -69,25 +86,19 @@ const Chat = () => {
           event: "INSERT",
           schema: "public",
           table: "portfolio_chat_messages",
+          filter: `chat_id=eq.${chatId}`,
         },
-        async (payload) => {
-          // Verify message belongs to this chat
-          const { data: chatData } = await supabase
-            .from("portfolio_chats")
-            .select("id")
-            .eq("tracking_id", trackingId)
-            .single();
-
-          if (payload.new.chat_id === chatData?.id) {
-            setMessages((prev) => [...prev, payload.new]);
-          }
+        (payload) => {
+          setMessages((prev) => {
+            // Prevent duplicates
+            if (prev.some(m => m.id === payload.new.id)) return prev;
+            return [...prev, payload.new];
+          });
         }
       )
       .subscribe();
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
+    return channel;
   };
 
   const handleSendMessage = async (e: React.FormEvent) => {
